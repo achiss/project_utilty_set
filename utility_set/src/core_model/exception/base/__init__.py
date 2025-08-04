@@ -1,0 +1,1 @@
+from src.core_model.exception.base.exception_decorator import exception_decorator
