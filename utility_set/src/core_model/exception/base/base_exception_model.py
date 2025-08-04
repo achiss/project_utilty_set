@@ -28,7 +28,7 @@ class BaseExceptionModel:
 
     # Dunder methods
     def __str__(self) -> str:
-        return (f'- model type: {self.custom_type.__name__}'
-                f'\n- exception type: {self.exception_type.__name__ if self.exception_type else self.exception_type}'
-                f'\n- message: {self.message}'
-                f'\n- created as: {self.datestamp} {self.timestamp}')
+        return (f'- class type: {self.custom_type.__name__}\n'
+                f'- exception type: {self.exception_type.__name__ if self.exception_type else self.exception_type}\n'
+                f'- message: {self.message}\n'
+                f'- created as: {self.datestamp} {self.timestamp}\n')

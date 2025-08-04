@@ -3,4 +3,4 @@
 
 MSG_SUCCESS: str = 'success'
 
-MSG_UNEXPECTED_ERROR: str = 'unexpected error'
+MSG_UNEXPECTED_ERROR: str = 'unexpected error{} {}'

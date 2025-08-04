@@ -37,7 +37,7 @@ def exception_decorator(cls):
 
         def display(self) -> None:
             print(f'\nException description:'
-                  f'\n- exception is error: {"True" if self.__exception.exception_type else "False"}')
+                  f'\n- exception as error: {"True" if self.__exception.exception_type else "False"}')
             print(self.__exception)
 
     Wrapped.__name__ = cls.__name__
