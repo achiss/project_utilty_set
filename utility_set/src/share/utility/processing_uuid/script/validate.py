@@ -5,9 +5,8 @@ from typing import Tuple, Type
 from data import REGEX_UUID, REGEX_UUID4, REGEX_UUID5
 
 
-def check_uuid_string(value: str, is_common: bool) -> Tuple[bool, bool | str, Type[Exception] | None]:
-
-    from data import MSG_UNEXPECTED_ERROR
+def check_uuid_string(value: str, is_common: bool,
+                      message: str) -> Tuple[bool, bool | str, Type[Exception] | None]:
 
     if is_common:
         try:
@@ -17,7 +16,8 @@ def check_uuid_string(value: str, is_common: bool) -> Tuple[bool, bool | str, Ty
             return True, False, None
 
         except Exception as e:
-            return False, MSG_UNEXPECTED_ERROR.format(e), Exception
+            _msg: str = message.format(':', e)
+            return False, _msg, Exception
 
     try:
         if bool(REGEX_UUID4.fullmatch(string=value)) or bool(REGEX_UUID5.fullmatch(string=value)):
@@ -26,7 +26,8 @@ def check_uuid_string(value: str, is_common: bool) -> Tuple[bool, bool | str, Ty
         return True, False, None
 
     except Exception as e:
-        return False, MSG_UNEXPECTED_ERROR.format(e), Exception
+        _msg: str = message.format(':', e)
+        return False, _msg, Exception
 
 
 @overload
@@ -39,7 +40,9 @@ def validate(value: str, is_common: bool) -> Tuple[bool, bool | str, Type[Except
 
 def validate(value: UUID | str = None, is_common: bool = None) -> Tuple[bool, bool | str, Type[Exception] | None]:
 
-     if isinstance(value, UUID):
-         return True, True, None
+    from data import MSG_UNEXPECTED_ERROR
 
-     return check_uuid_string(value, is_common)
+    if isinstance(value, UUID):
+        return True, True, None
+
+    return check_uuid_string(value, is_common, MSG_UNEXPECTED_ERROR)

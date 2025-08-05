@@ -50,4 +50,4 @@ def convert(value: UUID | str = None,
 
     else:
         _msg: str = MSG_UNEXPECTED_ERROR.format('', '').strip()
-        return False, MSG_UNEXPECTED_ERROR, Exception
+        return False, _msg, Exception

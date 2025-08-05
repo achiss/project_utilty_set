@@ -1,3 +1,5 @@
+""" EXCEPTION MODEL: PASSWORD """
+
 from src.core_model.exception.base import exception_decorator
 
 
