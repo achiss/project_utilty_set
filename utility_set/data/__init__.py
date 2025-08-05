@@ -9,3 +9,4 @@ from data.regex_uuid import REGEX_UUID, REGEX_UUID4, REGEX_UUID5
 
 # Section: Messages templates
 from data.message_common import MSG_SUCCESS, MSG_UNEXPECTED_ERROR
+from data.message_uuid import MESSAGE_TYPE_ERROR_ID, MESSAGE_UNEXPECTED_ERROR_ID
