@@ -23,7 +23,7 @@ def convert_id_force(value: UUID | str) -> Tuple[bool, UUID | str, str | None]:
     """
 
     from data import MESSAGE_TYPE_ERROR_ID, MESSAGE_UNEXPECTED_ERROR_ID
-    from src.share.utility.processing_uuid.core_model.convert_uuid_verification import check_data_type
+    from src.share.utility.processing_uuid.core_model.check_data_type import check_data_type
     from src.share.utility.processing_uuid.core_model.convert_uuid_method import from_string_to_uuid, from_uuid_to_string
 
     _base_message: str = 'Failed ID conversion'

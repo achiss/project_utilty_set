@@ -25,7 +25,7 @@ def convert_id_soft(value: UUID | str,
     """
 
     from data import MESSAGE_TYPE_ERROR_ID, MESSAGE_UNEXPECTED_ERROR_ID
-    from src.share.utility.processing_uuid.core_model.convert_uuid_verification import check_data_type
+    from src.share.utility.processing_uuid.core_model.check_data_type import check_data_type
     from src.share.utility.processing_uuid.core_model.convert_uuid_method import from_string_to_uuid, from_uuid_to_string
 
     _base_message: str = 'Failed ID conversion'
@@ -33,13 +33,13 @@ def convert_id_soft(value: UUID | str,
 
     if check_data_type(value, as_string=False):
         if reference_type != type(value):
-            return from_uuid_to_string(value, _message)
+            return from_uuid_to_string(value, message=_message)
 
         return True, value, None
 
     elif check_data_type(value, as_uuid=False):
         if reference_type != type(value):
-            return from_string_to_uuid(value, _message)
+            return from_string_to_uuid(value, message=_message)
 
         return True, value, None
 
