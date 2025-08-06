@@ -8,12 +8,12 @@ from uuid import uuid4
 from typing import Tuple
 
 
-def generate_uuid4(message: str) -> Tuple[bool, UUID | str, None | str]:
+def generate_uuid4(msg_unexpected_error: str) -> Tuple[bool, UUID | str, None | str]:
     """
     Method: generating uuid number (uuid4)
 
     Args:
-        message (str): exception message
+        msg_unexpected_error (str): exception message
 
     Returns:
         Tuple[bool, UUID | str, str | None]:
@@ -27,5 +27,5 @@ def generate_uuid4(message: str) -> Tuple[bool, UUID | str, None | str]:
         return True, _result, None
 
     except Exception as e:
-        _message: str = message.format(':', e)
+        _message: str = msg_unexpected_error.format(':', e)
         return False, _message, type(e).__name__

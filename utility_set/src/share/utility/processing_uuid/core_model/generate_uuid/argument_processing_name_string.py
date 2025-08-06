@@ -6,14 +6,14 @@ Method: arguments_processing
 from typing import Any, Tuple, List
 
 
-def arguments_processing(*args: Any,
-                         message: str) -> Tuple[bool, str, None | str]:
+def arguments_processing_name_string(*args: Any,
+                                     msg_unexpected_error: str) -> Tuple[bool, str, None | str]:
     """
-    Method: checks for arguments (if there are more than 0 arguments) returns a string of arguments
+    Method: argument "name_string" processing
 
     Args:
-        *args (Any): processing data (list of different data type value)
-        message (str): exception message
+        *args (Any): processing data (list of different data type value(s))
+        msg_unexpected_error (str): exception message
 
     Returns:
         Tuple[bool, str, str | None]:
@@ -35,5 +35,5 @@ def arguments_processing(*args: Any,
         return True, _result, None
 
     except Exception as e:
-        _message: str = message.format(':', e)
+        _message: str = msg_unexpected_error.format(':', e)
         return False, _message, type(e).__name__

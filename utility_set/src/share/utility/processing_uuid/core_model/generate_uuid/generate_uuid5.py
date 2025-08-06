@@ -9,15 +9,15 @@ from typing import Tuple
 
 
 def generate_uuid5(domain: UUID,
-                   name_string: str,
-                   message: str) -> Tuple[bool, UUID | str, None | str]:
+                   object_string: str,
+                   msg_unexpected_error: str) -> Tuple[bool, UUID | str, None | str]:
     """
     Method: generating uuid number (uuid5)
 
     Args:
         domain (UUID): base uuid (used in uuid generation)
-        name_string (str): object data (used in uuid generation)
-        message (str): exception message
+        object_string (str): object data (used in uuid generation)
+        msg_unexpected_error (str): exception message
 
     Returns:
         Tuple[bool, UUID | str, str | None]:
@@ -27,9 +27,9 @@ def generate_uuid5(domain: UUID,
     """
 
     try:
-        _result: UUID = uuid5(namespace=domain, name=name_string)
+        _result: UUID = uuid5(namespace=domain, name=object_string)
         return True, _result, None
 
     except Exception as e:
-        _message: str = message.format(':', e)
+        _message: str = msg_unexpected_error.format(':', e)
         return False, _message, type(e).__name__
