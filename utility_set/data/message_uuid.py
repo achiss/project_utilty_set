@@ -1,7 +1,17 @@
 """
-Processing ID (message)
+Processing ID (exception message)
 """
 
-MESSAGE_TYPE_ERROR_ID: str = 'invalid data type - expected "{}", got "{}"'
+# BASE MESSAGE
+MESSAGE_BASE_CONVERT: str = 'Failed to ID conversion'
 
-MESSAGE_UNEXPECTED_ERROR_ID: str = 'unexpected error{} {}'
+MASSAGE_BASE_GENERATE: str = 'Failed to ID generation'
+
+MESSAGE_BASE_VALIDATE: str = 'Failed to ID validation'
+
+# ERROR MESSAGE TEMPLATE
+MESSAGE_ATTRIBUTE_ERROR: str = 'incorrect use of the attribute "{}"'
+
+MESSAGE_TYPE_ERROR: str = 'invalid data type - expected "{}", got "{}"'
+
+MESSAGE_UNEXPECTED_ERROR: str = 'unexpected error{} {}'

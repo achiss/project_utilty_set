@@ -1,14 +1,13 @@
 """
-Processing ID (core): generate id
-Methods:
-    args_processing
+Processing uuid: core model - generate uuid (folder)
+Method: arguments_processing
 """
 
 from typing import Any, Tuple, List
 
 
-def args_processing(*args: Any,
-                    message: str) -> Tuple[bool, str, None | str]:
+def arguments_processing(*args: Any,
+                         message: str) -> Tuple[bool, str, None | str]:
     """
     Method: checks for arguments (if there are more than 0 arguments) returns a string of arguments
 

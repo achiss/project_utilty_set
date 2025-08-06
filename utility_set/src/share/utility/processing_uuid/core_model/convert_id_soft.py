@@ -33,13 +33,13 @@ def convert_id_soft(value: UUID | str,
 
     if check_data_type(value, as_string=False):
         if reference_type != type(value):
-            return from_uuid_to_string(value, _message)
+            return from_uuid_to_string(value, message=_message)
 
         return True, value, None
 
     elif check_data_type(value, as_uuid=False):
         if reference_type != type(value):
-            return from_string_to_uuid(value, _message)
+            return from_string_to_uuid(value, message=_message)
 
         return True, value, None
 
