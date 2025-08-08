@@ -3,14 +3,14 @@ Script (processing id - convert uuid): converting data.
 """
 
 from uuid import UUID
-from typing import Tuple
+from typing import Tuple, Type
 from typing import overload
 
 from src.share.utility.processor_id.utility_model.converting_uuid._base_converting import base_converting
 from src.share.utility.processor_id.utility_model.converting_uuid._verification_argument import \
     verification_argument_uuid_value, verification_argument_reference_type
 
-T: type = Tuple[bool, UUID | str, None | str]
+T: type[tuple] = Tuple[bool, UUID | str, None | str]
 
 
 @overload

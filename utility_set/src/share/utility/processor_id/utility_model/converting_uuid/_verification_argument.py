@@ -2,10 +2,10 @@
 Script (processing id - convert uuid): verification data.
 """
 
-from typing import Type, Any, Tuple
+from typing import Tuple, Any
 from uuid import UUID
 
-T: Type[Tuple] = Tuple[bool, bool | str, None | str]
+T: type[tuple] = Tuple[bool, bool | str, None | str]
 
 
 def verification_argument_uuid_value(value: Any) -> T:
