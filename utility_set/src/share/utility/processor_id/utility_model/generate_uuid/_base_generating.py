@@ -21,8 +21,8 @@ def  base_generating(object_data: str | None,
     Returns:
         Tuple[bool, UUID | str, None | str]
             -   if operation succeed - True, otherwise False;
-            -   if generation succeed - uuid number, otherwise exception message;
-            -   if generation succeed - None, otherwise name string of exception type.
+            -   if generation (base) succeed - uuid number, otherwise exception message;
+            -   if generation (base) succeed - None, otherwise name string of exception type.
     """
 
     from data.message import MSG_UNEXPECTED_ERROR

@@ -17,9 +17,9 @@ def verification_argument_uuid_value(value: Any) -> T:
 
     Returns:
         Tuple[bool, bool | str, None | str]:
-            -   Successes (True) operation, otherwise False.
-            -   `If operation succeed`: True if argument data type is UUID else (str) False. `If operation failed`: exception message.
-            -   `If operation succeed`: None. `If operation failed`: name of exception type.
+            -   if operation succeed - True, otherwise False;
+            -   if verification succeed - True if UUID or False if str, otherwise exception message;
+            -   if verification succeed - None, otherwise name string of exception type.
     """
 
     from data.message import MSG_VALUE_ERROR, MSG_DATA_TYPE_ERROR

@@ -31,9 +31,9 @@ def converting_uuid(value: UUID | str, reference_type: type = None) -> T:
 
     Returns:
         Tuple[bool, UUID | str, None | str]
-            -   Successes (True) operation, otherwise False.
-            -   `If operation succeed`: uuid number or uuid string. `If operation failed`: exception message.
-            -   `If operation succeed`: None. `If operation failed`: name of exception type.
+            -   if operation succeed - True, otherwise False;
+            -   If converting succeed: uuid number (UUID | str), otherwise exception message;
+            -   if converting succeed - None, otherwise name string of exception type.
     """
 
     _flag, _data, _e = verification_argument_uuid_value(value)

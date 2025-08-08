@@ -19,9 +19,9 @@ def base_converting(value: UUID | str,
 
     Returns:
         Tuple[bool, UUID | str, None | str]
-            -   Successes operation is True, otherwise False.
-            -   `If operation succeed`: uuid number or uuid string. `If operation failed`: exception message.
-            -   `If operation succeed`: None. `If operation failed`: name of exception type.
+            -   if operation succeed - True, otherwise False;
+            -   If converting (base) succeed: uuid number (UUID | str), otherwise exception message;
+            -   if converting (base) succeed - None, otherwise name string of exception type.
     """
 
     from data.message import MSG_UNEXPECTED_ERROR

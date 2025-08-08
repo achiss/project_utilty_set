@@ -32,12 +32,12 @@ def generate_uuid(*object_data: Any,
     Args:
         *object_data (Any): data object arguments value(s) (used for uuid5)
         object_domain (UUID): domain object value (used for uuid5)
-    
+
     Returns:
         Tuple[bool, UUID | str, None | str]
             -   if operation succeed - True, otherwise False;
-            -   if verification succeed - uuid number, otherwise exception message;
-            -   if verification succeed - None, otherwise name string of exception type.
+            -   if generating succeed - uuid number, otherwise exception message;
+            -   if generating succeed - None, otherwise name string of exception type.
     """
 
     if not (object_data or object_domain):
