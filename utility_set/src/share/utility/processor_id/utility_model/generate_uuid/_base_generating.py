@@ -9,14 +9,9 @@ from typing import Tuple
 T: type[tuple] = Tuple[bool, UUID | str, None | str]
 
 
-def  base_generating(object_data: str | None,
-                     object_domain: UUID | None) -> T:
+def generate_uuid4() -> T:
     """
-    Base generating method.
-
-    Args:
-        object_data (str | None): (used for generate uuid5)
-        object_domain (UUID | None): (used for generate uuid5)
+    Base generating method (uuid4).
 
     Returns:
         Tuple[bool, UUID | str, None | str]
@@ -28,14 +23,35 @@ def  base_generating(object_data: str | None,
     from data.message import MSG_UNEXPECTED_ERROR
 
     try:
-        if (object_data and object_domain) is None:
-            _result: UUID = uuid4()
-
-        else:
-            _result: UUID = uuid5(namespace=object_domain, name=object_data)
-
+        _result: UUID = uuid4()
         return True, _result, None
 
     except Exception as e:
-        _message: str = MSG_UNEXPECTED_ERROR.format('-', e)
+        _message: str = MSG_UNEXPECTED_ERROR.format('- during generating uuid 4 -', e)
+        return False, _message, type(e).__name__
+
+
+def generate_uuid5(object_data: str, object_domain: UUID) -> T:
+    """
+    Base generating method (uuid5).
+
+    Args:
+        object_data (str | None): object data string (parameter `name`)
+        object_domain (UUID | None): object domain (parameter `namespace`)
+
+    Returns:
+        Tuple[bool, UUID | str, None | str]
+            -   if operation succeed - True, otherwise False;
+            -   if generation (base) succeed - uuid number, otherwise exception message;
+            -   if generation (base) succeed - None, otherwise name string of exception type.
+    """
+
+    from data.message import MSG_UNEXPECTED_ERROR
+
+    try:
+        _result: UUID = uuid5(namespace=object_domain, name=object_data)
+        return True, _result, None
+
+    except Exception as e:
+        _message: str = MSG_UNEXPECTED_ERROR.format('- during generating uuid 5 -', e)
         return False, _message, type(e).__name__

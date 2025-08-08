@@ -3,10 +3,9 @@ Script (processing id - generate uuid): generate uuid.
 """
 
 from typing import Tuple, Any
-from typing import overload
 from uuid import UUID
 
-from src.share.utility.processor_id.utility_model.generate_uuid._base_generating import base_generating
+from src.share.utility.processor_id.utility_model.generate_uuid._base_generating import generate_uuid4, generate_uuid5
 from src.share.utility.processor_id.utility_model.generate_uuid._verification_argument import \
     verification_argument_object_data, verification_argument_object_domain
 from src.share.utility.processor_id.utility_model.generate_uuid._processing_argument import \
@@ -15,17 +14,9 @@ from src.share.utility.processor_id.utility_model.generate_uuid._processing_argu
 
 T: type[tuple] = Tuple[bool, UUID | str, None | str]
 
-@overload
-def generate_uuid() -> T:...
-
-
-@overload
-def generate_uuid(*object_data: Any,
-                  object_domain: UUID) -> T:...
-
 
 def generate_uuid(*object_data: Any,
-                  object_domain: UUID = None) -> T:
+                  object_domain: Any) -> T:
     """
     ID generation method (used: uuid4 | uuid5)
 
@@ -40,8 +31,8 @@ def generate_uuid(*object_data: Any,
             -   if generating succeed - None, otherwise name string of exception type.
     """
 
-    if not (object_data or object_domain):
-        _flag, _data, _e = base_generating(object_data=None,object_domain=None)
+    if object_domain is None:
+        _flag, _data, _e = generate_uuid4()
         if not _flag:
             return False, _data, _e
 
@@ -58,8 +49,8 @@ def generate_uuid(*object_data: Any,
         if not _flag:
             return False, _data, _e
 
-        return base_generating(object_data=_data, object_domain=object_domain)
+        return generate_uuid5(object_data=_data, object_domain=object_domain)
 
 
 if __name__ == '__main__':
-    pass
+    print(generate_uuid(object_domain=None))

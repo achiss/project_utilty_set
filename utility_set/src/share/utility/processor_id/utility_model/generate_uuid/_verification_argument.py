@@ -52,7 +52,7 @@ def verification_argument_object_domain(value: UUID) -> T:
     from data.message import MSG_DATA_TYPE_ERROR
 
     if not isinstance(value, UUID):
-        _message: str = MSG_DATA_TYPE_ERROR.format('UUID', type(value).__name__)
+        _message: str = f' during validate parameter "object_domain" {MSG_DATA_TYPE_ERROR.format('UUID', type(value).__name__)}'
         return False, _message, TypeError.__name__
 
     return True, None, None
