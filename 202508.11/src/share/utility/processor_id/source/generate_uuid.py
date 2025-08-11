@@ -5,7 +5,7 @@ from uuid import UUID
 from src.share.utility.processor_id.source.generate_uuid_method.generate_uuid4 import generate_uuid4
 from src.share.utility.processor_id.source.generate_uuid_method.generate_uuid5 import generate_uuid5
 from src.share.utility.processor_id.source.generate_uuid_method.processing_object_data import processing_object_data
-from src.share.utility.processor_id.source.common_methods.verify_attribute import verify_uuid_value
+from src.share.utility.processor_id.source.common_method.verify_attribute import verify_uuid_value
 
 T: TypeAlias = Tuple[bool, UUID | str, Type[Exception] | None]
 
@@ -20,7 +20,7 @@ def generate_uuid(*object_data: Any, object_domain: UUID) -> 'T': ...
 
 def generate_uuid(*object_data: Any, object_domain: UUID = None) -> 'T':
     """
-    Generate UUID (overload) methods:
+    Generate UUID (overload) method:
         1-st: generate uuid4
         2-nd: generate uuid5
 
@@ -28,7 +28,8 @@ def generate_uuid(*object_data: Any, object_domain: UUID = None) -> 'T':
         object_data (Any): object data (for uuid5)
         object_domain (UUID): object domain (for uuid5)
 
-    Returns: (Tuple[str, UUID | str, Type[Exception] | None])
+    Returns:
+        -   (Tuple[str, UUID | str, Type[Exception] | None])
         -   If operation succeeded - True, False otherwise.
         -   if operation succeeded return UUID, else return exception message.
         -   If operation succeeded return None, else return exception type.

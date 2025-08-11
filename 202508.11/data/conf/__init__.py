@@ -3,3 +3,6 @@ from data.conf.format import \
 
 from data.conf.regex import \
     REGEX_UUID, REGEX_UUID4, REGEX_UUID5
+
+from data.conf.prefix_salt import  \
+    PREFIX_SALT
