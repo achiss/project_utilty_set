@@ -14,25 +14,34 @@ class HashingProcessor:
 
     #   VERIFY METHODS
     @staticmethod
-    def __verify_password_string(value: Any) -> Y:
+    def __verify_password_string(value: Any,
+                                 type_error: str,
+                                 value_error: str) -> Y:
+
         if not isinstance(value, str):
-            _message: str = f'password value should be a string, got {type(value).__name__}'
+            _message: str = type_error.format(
+                'received password', 'str', type(value).__name__)
             return _message, TypeError
 
         if not (MIN_PASSWORD_LENGTH <= len(value) <= MAX_PASSWORD_LENGTH):
-            _message: str = f'incorrect password length, should be between {MIN_PASSWORD_LENGTH} and {MAX_PASSWORD_LENGTH}'
+            _message: str = value_error.format(
+                'received password length', f'should be between {MIN_PASSWORD_LENGTH} and {MAX_PASSWORD_LENGTH}')
             return _message, ValueError
 
         return True
 
     @staticmethod
-    def __verify_password_hash(value: bytes, fmt: bytes) -> Y:
+    def __verify_password_hash(value: Any, fmt: bytes,
+                               type_error: str,
+                               value_error: str) -> Y:
+
         if not isinstance(value, bytes):
-            _message: str = f'hashed value should be a bytes, got {type(value).__name__}'
+            _message: str = type_error.format(
+                'received hashed password', 'bytes', type(value).__name__)
             return _message, TypeError
 
         if len(value) != 60 and value.startswith(fmt):
-            _message: str = 'invalid hash format (library bcrypt)'
+            _message: str = value_error.format('received hashed password', 'should be match the specified format')
             return _message, ValueError
 
         return False
@@ -43,30 +52,38 @@ class HashingProcessor:
 
     #   GET PASSWORD HASH
     @staticmethod
-    def get_hash(password_string: str) -> T:
+    def get_hash(password_string: str,
+                 value_error: str, type_error: str, unexpected_error: str) -> T:
 
         try:
-            if (_check_result := HashingProcessor.__verify_password_string(value=password_string))[0] is not True:
+            if _check_result := HashingProcessor.__verify_password_string(
+                    value=password_string, value_error=value_error, type_error=type_error)[0] is not True:
                 return False, _check_result[0], _check_result[1]
 
-            _result: bytes = HashingProcessor.__generate_salt(iteration=12, prefix=b'2a')
+            if _check_result := HashingProcessor.__generate_salt(
+                    iteration=ITERATION_NUMBER, prefix=PREFIX_STRING)[0] is not True:
+                return True, _check_result[0], _check_result[1]
+
+            password_string: bytes = password_string.encode(encoding='utf-8')
+            _result: bytes = hashpw(password=password_string, salt=_check_result[0])
             return True, _result
 
-            password_string: bytes = password_string
-
         except Exception as e:
-            _message: str = ''
+            _message: str = unexpected_error.format('password hashing', e)
             return False, _message, type(e)
 
     #   VALIDATE PASSWORD HASH
     @staticmethod
-    def verify_hash(password_string: str, hashed_password: bytes) -> T:
+    def verify_hash(password_string: str, hashed_password: bytes,
+                    value_error: str, type_error: str, unexpected_error: str) -> T:
 
         try:
-            if (_check_result := HashingProcessor.__verify_password_string(value=password_string))[0] is not True:
+            if _check_result := HashingProcessor.__verify_password_string(
+                    value=password_string, value_error=value_error, type_error=type_error)[0] is not True:
                 return False, _check_result[0], _check_result[1]
 
-            if (_check_result := HashingProcessor.__verify_password_hash(value=hashed_password, fmt=b'2a'))[0] is not True:
+            if _check_result := HashingProcessor.__verify_password_hash(
+                    value=hashed_password, fmt=PREFIX_STRING, value_error=value_error, type_error=type_error)[0] is not True:
                 return False, _check_result[0], _check_result[1]
 
             password_string: bytes = password_string.encode(encoding='utf-8')
@@ -74,5 +91,5 @@ class HashingProcessor:
             return True, _result
 
         except Exception as e:
-            _message: str = ''
+            _message: str = unexpected_error.format('hashed password verification', e)
             return False, _message, type(e)
