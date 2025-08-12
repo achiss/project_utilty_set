@@ -16,10 +16,6 @@ def check_hashed_password(value: Any,
             _message: str = message_value.format(_base_message, 'should be equal to 60 characters')
             return _message, ValueError
 
-        if not value.startswith(prefix=prefix_string):
-            _message: str = message_value.format(_base_message, f'should be start with "{prefix_string}"')
-            return _message, ValueError
-
         return None
 
     _message: str = message_type.format(_base_message, 'bytes', TypeError.__name__)

@@ -6,6 +6,8 @@ from src.share.utility.processor_password.source import (
 from data.settings import PASS_MIN_LENGTH, PASS_MAX_LENGTH, PASS_ITERATION_NUMBER, PASS_PREFIX_STRING
 from data.message import MSG_TYPE_ERROR, MSG_VALUE_ERROR, MSG_UNEXPECTED_ERROR
 
+from src.core_model import ExceptionPassword
+
 
 T: TypeAlias = bytes | Tuple[str, Type[Exception]]
 YG: TypeAlias = bytes | Tuple[str, Type[Exception]]
@@ -30,7 +32,7 @@ class ProcessorPassword:
             check_password=check_password_string)
 
         if bytes != type(_result):
-            raise _result[1](_result[0])
+            raise ExceptionPassword(_result[1], _result[0])
 
         return _result
 
@@ -52,11 +54,6 @@ class ProcessorPassword:
         )
 
         if bool != type(_result):
-            raise _result[1](_result[0])
+            raise ExceptionPassword(_result[1], _result[0])
 
         return _result
-
-
-if __name__ == '__main__':
-    _hash = ProcessorPassword.generate_hash('12345678')
-    print(_hash)
