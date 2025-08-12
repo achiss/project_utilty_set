@@ -7,13 +7,16 @@ _base_message: str = 'verification password string'
 
 
 def check_password_string(value: Any,
-                          min_password: int, max_password: int,
-                          message_value: str, message_type: str) -> T:
+                          min_password: int,
+                          max_password: int,
+                          message_value: str,
+                          message_type: str) -> T:
 
     if isinstance(value, str):
         value = value.strip()
         if len(value) == 0:
             _message: str = message_value.format(_base_message, 'cannot be whitespace or empty')
+            return _message, ValueError
 
         if len(value) < min_password:
             _message: str = message_value.format(_base_message, f'cannot be less then "{min_password}"')
