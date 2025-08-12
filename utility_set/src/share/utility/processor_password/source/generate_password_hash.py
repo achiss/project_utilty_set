@@ -9,9 +9,13 @@ _base_message: str = 'generating password hash'
 
 
 def generate_password_hash(value: str,
-                           min_password: int, max_password: int,
-                           iteration_number: int, prefix_string: bytes,
-                           message_value: str, message_type: str, message_unexpected: str,
+                           min_password: int,
+                           max_password: int,
+                           iteration_number: int,
+                           prefix_string: bytes,
+                           message_value: str,
+                           message_type: str,
+                           message_unexpected: str,
                            check_password: callable) -> T:
 
     _checked_att = check_password(value, min_password, max_password, message_value, message_type)
@@ -26,7 +30,3 @@ def generate_password_hash(value: str,
     except Exception as e:
         _message: str = message_unexpected.format(_base_message, e)
         return _message, type(e)
-
-
-if __name__ == '__main__':
-    pass
