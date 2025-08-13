@@ -89,5 +89,5 @@ class ProcessorPassword:
 
 
 if __name__ == '__main__':
-    _pass = ProcessorPassword.generate_password_string(19, use_digit=True, use_special=True)
+    _pass = ProcessorPassword.generate_password_string(24, use_digit=True, use_special=True)
     print(_pass)
