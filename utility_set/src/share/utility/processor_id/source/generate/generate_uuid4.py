@@ -9,6 +9,8 @@ T: TypeAlias = UUID | Tuple[str, Type[Exception]]
 def generate_uuid4(base_message: str,
                    message_unexpected: str) -> T:
 
+    base_message = f'{base_message} (operation uuid4)'
+
     try:
         _result: UUID = uuid4()
         return _result
