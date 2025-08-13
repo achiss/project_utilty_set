@@ -7,13 +7,13 @@ _base_message: str = 'verification hashed password'
 
 
 def check_hashed_password(value: Any,
-                          prefix_string: bytes,
+                          hash_size: int,
                           message_value: str,
                           message_type: str) -> T:
 
     if bytes == type(value):
-        if len(value) != 60:
-            _message: str = message_value.format(_base_message, 'should be equal to 60 characters')
+        if len(value) != hash_size:
+            _message: str = message_value.format(_base_message, f'should be equal to "{hash_size}" characters')
             return _message, ValueError
 
         return None

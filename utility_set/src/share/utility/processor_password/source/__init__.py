@@ -6,6 +6,7 @@ from src.share.utility.processor_password.source.generate_password_string import
 # Validate methods
 from src.share.utility.processor_password.source.check_password_string import check_password_string
 from src.share.utility.processor_password.source.check_hashed_password import check_hashed_password
+from src.share.utility.processor_password.source.check_password_length import check_password_length
 
 # Processing methods
 from src.share.utility.processor_password.source.get_char_list_digits import get_char_list_digits
