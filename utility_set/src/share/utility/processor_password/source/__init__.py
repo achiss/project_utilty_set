@@ -1,7 +1,13 @@
-#
+# Main methods
 from src.share.utility.processor_password.source.generate_password_hash import generate_password_hash
 from src.share.utility.processor_password.source.validate_password_hash import validate_password_hash
+from src.share.utility.processor_password.source.generate_password_string import generate_password_string
 
 # Validate methods
 from src.share.utility.processor_password.source.check_password_string import check_password_string
 from src.share.utility.processor_password.source.check_hashed_password import check_hashed_password
+
+# Processing methods
+from src.share.utility.processor_password.source.get_char_list_digits import get_char_list_digits
+from src.share.utility.processor_password.source.get_char_list_special import get_char_list_special
+from src.share.utility.processor_password.source.get_password_string import get_password_string

@@ -7,3 +7,5 @@ PASS_ITERATION_NUMBER: int = 12
 PASS_PREFIX_STRING: bytes = b'2a'
 
 PASS_HASH_SIZE: int = 60
+
+SPECIAL_CHARS: str = "@!#?:-="
