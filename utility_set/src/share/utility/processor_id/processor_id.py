@@ -4,7 +4,7 @@ from uuid import UUID
 
 from src.share.utility.processor_id.source import (
     generate_uuid, processing_object_data, generate_uuid4, generate_uuid5, validate_uuid, validate_type_string,
-    convert_uuid, soft_converting, force_converting, validate_data_type)
+    convert_uuid, soft_converting, force_converting, processing_value_type, check_reference_type)
 from data.settings import REGEX_UUID, REGEX_UUID4, REGEX_UUID5, CHARS_NUMBER_UUID
 from data.message import MSG_TYPE_ERROR, MSG_UNEXPECTED_ERROR, MSG_VALUE_ERROR
 
@@ -24,7 +24,22 @@ class ProcessorID:
     @staticmethod
     def convert_id(uuid_value: str | UUID = None, reference_type: type = None) -> str | UUID:
 
-        pass
+        _result: str | UUID | Tuple[str, Type[Exception]] = convert_uuid(
+            uuid_value,
+            reference_type=reference_type,
+            const_chars_number_uuid=CHARS_NUMBER_UUID,
+            template_regex_uuid=REGEX_UUID,
+            message_type=MSG_TYPE_ERROR,
+            message_value=MSG_VALUE_ERROR,
+            message_unexpected=MSG_UNEXPECTED_ERROR,
+            func_processing_value_type=processing_value_type,
+            func_check_reference_type=check_reference_type,
+            func_force_converting=force_converting,
+            func_soft_converting=soft_converting,
+        )
+
+        print(_result)
+        print(type(_result))
 
     @staticmethod
     @overload
@@ -47,7 +62,6 @@ class ProcessorID:
             processing_object_data=processing_object_data,
         )
 
-        print(_result)
         if UUID != type(_result):
             raise ExceptionID(_result[1], _result[0])
 
@@ -87,6 +101,4 @@ if __name__ == "__main__":
     _id_1 = ProcessorID.generate_id()
     _id_2 = ProcessorID.generate_id('test data', 123, object_domain=_id_1)
 
-    _convert_1 = ProcessorID.convert_id(_id_1)
-
-    print(_convert_1)
+    _convert_1 = ProcessorID.convert_id()

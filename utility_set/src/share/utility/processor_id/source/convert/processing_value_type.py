@@ -7,9 +7,9 @@ T: TypeAlias = bool | Tuple[str, Type[Exception]]
 
 
 def processing_value_type(value: Any,
-                          chars_number_uuid: int,
-                          template_uuid: Pattern,
-                          base_message: str,
+                          const_chars_number_uuid: int,
+                          template_regex_uuid: Pattern,
+                          message_base_method: str,
                           message_type: str,
                           message_value: str) -> T:
 
@@ -22,15 +22,15 @@ def processing_value_type(value: Any,
     _method_name: str = '(method: processing value type)'
 
     if str == type(value):
-        if len(value) != chars_number_uuid:
+        if len(value) != const_chars_number_uuid:
             _message: str = message_value.format(
-                f'{base_message} {_method_name}',
-                f'incorrect uuid string length, expected {chars_number_uuid}, got {len(value)}')
+                f'{message_base_method} {_method_name}',
+                f'incorrect uuid string length, expected {const_chars_number_uuid}, got {len(value)}')
             return _message, ValueError
 
-        if not bool(template_uuid.match(value)):
+        if not bool(template_regex_uuid.match(value)):
             _message: str = message_value.format(
-                f'{base_message} {_method_name}',
+                f'{message_base_method} {_method_name}',
                 'incorrect uuid string format')
 
         return False
@@ -40,5 +40,5 @@ def processing_value_type(value: Any,
 
     else:
         _message: str = message_type.format(
-            f'{base_message} {_method_name}', 'str or UUID', 'TypeError')
+            f'{message_base_method} {_method_name}', 'str or UUID', 'TypeError')
         return _message, TypeError

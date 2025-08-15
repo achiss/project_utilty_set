@@ -6,7 +6,7 @@ T: TypeAlias = None | Tuple[str, Type[Exception]]
 
 
 def check_reference_type(value: Any,
-                         base_message: str,
+                         message_base_method: str,
                          message_type: str) -> T:
 
     """
@@ -21,5 +21,5 @@ def check_reference_type(value: Any,
 
     else:
         _message: str = message_type.format(
-            f'{base_message} {_method_name}', 'str or UUID', 'TypeError')
+            f'{message_base_method} {_method_name}', 'str or UUID', 'TypeError')
         return _message, TypeError
