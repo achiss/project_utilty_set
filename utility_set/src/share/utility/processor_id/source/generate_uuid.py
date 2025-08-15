@@ -15,8 +15,8 @@ def generate_uuid(*object_data: Any,
 
     _base_message: str = 'Generate UUID failed'
 
-    if not (object_domain or object_data):
-        return generate_uuid4()
+    if object_domain is None:
+        return generate_uuid4(base_message=_base_message, message_unexpected=message_unexpected)
 
     else:
         object_data: str | Tuple[str, Type[Exception]] = processing_object_data(
@@ -30,8 +30,3 @@ def generate_uuid(*object_data: Any,
 
         return generate_uuid5(
             object_data, object_domain, base_message=_base_message, message_unexpected=message_unexpected)
-
-
-if __name__ == '__main__':
-    _id = generate_uuid()
-    print(_id)
