@@ -7,11 +7,17 @@ T: TypeAlias = bool | Tuple[str, Type[Exception]]
 
 def validate_type_string(value: str,
                          is_common_check: bool,
+                         uuid_characters_number: int,
                          template_uuid: Pattern,
                          template_uuid4: Pattern,
                          template_uuid5: Pattern,
                          base_message: str,
+                         message_value: str,
                          message_unexpected: str) -> T:
+
+    if len(value) != uuid_characters_number:
+        _message: str = message_value.format(base_message, 'incorrect chars number')
+        return _message, ValueError
 
     try:
         if is_common_check:

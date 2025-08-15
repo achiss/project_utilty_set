@@ -5,8 +5,8 @@ from uuid import UUID
 from src.share.utility.processor_id.source import (
     generate_uuid, processing_object_data, generate_uuid4, generate_uuid5,
     validate_uuid, validate_type_string)
-from data.settings import REGEX_UUID, REGEX_UUID4, REGEX_UUID5
-from data.message import MSG_TYPE_ERROR, MSG_UNEXPECTED_ERROR
+from data.settings import REGEX_UUID, REGEX_UUID4, REGEX_UUID5, CHARS_NUMBER_UUID
+from data.message import MSG_TYPE_ERROR, MSG_UNEXPECTED_ERROR, MSG_VALUE_ERROR
 
 from src.core_model import ExceptionID
 
@@ -53,10 +53,12 @@ class ProcessorID:
         _result: bool | Tuple[str, Type[Exception]] = validate_uuid(
             uuid_value,
             is_common_check,
+            uuid_characters_number=CHARS_NUMBER_UUID,
             template_uuid=REGEX_UUID,
             template_uuid4=REGEX_UUID4,
             template_uuid5=REGEX_UUID5,
             message_type=MSG_TYPE_ERROR,
+            message_value=MSG_VALUE_ERROR,
             message_unexpected=MSG_UNEXPECTED_ERROR,
             func_validate_type_string=validate_type_string,
         )
@@ -74,7 +76,8 @@ if __name__ == "__main__":
     print(_id_1)
     print(_id_2)
 
-    _id_3 = 123
+
+    _id_3 = '6a46b010-8ef9-23e8-b80e-970bae61c0e4'
 
     _check_1 = ProcessorID.validate_id(_id_3, is_common_check=False)
     _check_2 = ProcessorID.validate_id(_id_2)
